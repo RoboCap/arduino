@@ -1,0 +1,7 @@
+exercise/01_led/build/
+exercise/01_solar_full_auto/build/
+exercise/04_solar_manual/build/
+exercise/02_led_button/build/
+exercise/03_potentiometer/build/
+exercise/*/*.depend
+exercise/*/*.layout
