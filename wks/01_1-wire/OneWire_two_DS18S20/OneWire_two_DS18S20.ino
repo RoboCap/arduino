@@ -1,3 +1,4 @@
+#include <Arduino.h>
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
@@ -8,57 +9,11 @@
 // Setup a oneWire instance to communicate with any OneWire devices (not just Maxim/Dallas temperature ICs)
 OneWire oneWire(ONE_WIRE_BUS);
 
-// Pass our oneWire reference to Dallas Temperature. 
+// Pass our oneWire reference to Dallas Temperature.
 DallasTemperature sensors(&oneWire);
 
 // arrays to hold device addresses
 DeviceAddress insideThermometer, outsideThermometer;
-
-void setup(void)
-{
-  // start serial port
-  Serial.begin(9600);
-  Serial.println("Dallas Temperature IC Control Library Demo");
-
-  // Start up the library
-  sensors.begin();
-
-  // locate devices on the bus
-  Serial.print("Locating devices...");
-  Serial.print("Found ");
-  Serial.print(sensors.getDeviceCount(), DEC);
-  Serial.println(" devices.");
-
-  // report parasite power requirements
-  Serial.print("Parasite power is: "); 
-  if (sensors.isParasitePowerMode()) Serial.println("ON");
-  else Serial.println("OFF");
-
-  // method 1: by index
-  if (!sensors.getAddress(insideThermometer, 0)) Serial.println("Unable to find address for Device 0"); 
-  if (!sensors.getAddress(outsideThermometer, 1)) Serial.println("Unable to find address for Device 1"); 
-
-  // show the addresses we found on the bus
-  Serial.print("Device 0 Address: ");
-  printAddress(insideThermometer);
-  Serial.println();
-
-  Serial.print("Device 1 Address: ");
-  printAddress(outsideThermometer);
-  Serial.println();
-
-  // set the resolution to 9 bit
-  sensors.setResolution(insideThermometer, TEMPERATURE_PRECISION);
-  sensors.setResolution(outsideThermometer, TEMPERATURE_PRECISION);
-
-  Serial.print("Device 0 Resolution: ");
-  Serial.print(sensors.getResolution(insideThermometer), DEC); 
-  Serial.println();
-
-  Serial.print("Device 1 Resolution: ");
-  Serial.print(sensors.getResolution(outsideThermometer), DEC); 
-  Serial.println();
-}
 
 // function to print a device address
 void printAddress(DeviceAddress deviceAddress)
@@ -86,7 +41,7 @@ void printResolution(DeviceAddress deviceAddress)
 {
   Serial.print("Resolution: ");
   Serial.print(sensors.getResolution(deviceAddress));
-  Serial.println();    
+  Serial.println();
 }
 
 // main function to print information about a device
@@ -99,9 +54,55 @@ void printData(DeviceAddress deviceAddress)
   Serial.println();
 }
 
+void setup(void)
+{
+  // start serial port
+  Serial.begin(9600);
+  Serial.println("Dallas Temperature IC Control Library Demo");
+
+  // Start up the library
+  sensors.begin();
+
+  // locate devices on the bus
+  Serial.print("Locating devices...");
+  Serial.print("Found ");
+  Serial.print(sensors.getDeviceCount(), DEC);
+  Serial.println(" devices.");
+
+  // report parasite power requirements
+  Serial.print("Parasite power is: ");
+  if (sensors.isParasitePowerMode()) Serial.println("ON");
+  else Serial.println("OFF");
+
+  // method 1: by index
+  if (!sensors.getAddress(insideThermometer, 0)) Serial.println("Unable to find address for Device 0");
+  if (!sensors.getAddress(outsideThermometer, 1)) Serial.println("Unable to find address for Device 1");
+
+  // show the addresses we found on the bus
+  Serial.print("Device 0 Address: ");
+  printAddress(insideThermometer);
+  Serial.println();
+
+  Serial.print("Device 1 Address: ");
+  printAddress(outsideThermometer);
+  Serial.println();
+
+  // set the resolution to 9 bit
+  sensors.setResolution(insideThermometer, TEMPERATURE_PRECISION);
+  sensors.setResolution(outsideThermometer, TEMPERATURE_PRECISION);
+
+  Serial.print("Device 0 Resolution: ");
+  Serial.print(sensors.getResolution(insideThermometer), DEC);
+  Serial.println();
+
+  Serial.print("Device 1 Resolution: ");
+  Serial.print(sensors.getResolution(outsideThermometer), DEC);
+  Serial.println();
+}
+
 void loop(void)
-{ 
-  // call sensors.requestTemperatures() to issue a global temperature 
+{
+  // call sensors.requestTemperatures() to issue a global temperature
   // request to all devices on the bus
   Serial.print("Requesting temperatures...");
   sensors.requestTemperatures();
@@ -110,7 +111,7 @@ void loop(void)
   // print the device information
   printData(insideThermometer);
   printData(outsideThermometer);
-  
+
   delay(5000);
 }
-
+
