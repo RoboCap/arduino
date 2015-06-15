@@ -8,16 +8,16 @@ void printValues(int rV, int mV) {
 }
 
 void setup() {
-  pinMode(11, OUTPUT);
+  pinMode(10, OUTPUT);
   Serial.begin(9600);
 }
 
 void loop() {
-  int rV = analogRead(A0);
+  int rV = analogRead(A1);
   int mV = map(rV, 0, 1023, 0, 255);
   printValues(rV, mV);
-  analogWrite(11, mV);
-  delay(500);
+  analogWrite(10, mV);
+  delay(50);
 }
 
 

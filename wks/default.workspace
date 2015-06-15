@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_workspace_file>
+	<Workspace title="Workspace">
+		<Project filename="A_03_01_digital_output/digital_output/digital_output.cbp" />
+		<Project filename="A_03_02_digital_input/digital_input/digital_input.cbp" />
+		<Project filename="A_03_02_digital_input/digital_input_pullup/digital_input_pullup.cbp" />
+		<Project filename="A_03_02_digital_input/digital_input_interrupt/digital_input_interrupt.cbp" />
+		<Project filename="A_03_03_analog_input_pwm/analog_input_pwm/analog_input_pwm.cbp" />
+	</Workspace>
+</CodeBlocks_workspace_file>

@@ -7,3 +7,4 @@
 **/*.layout
 **/*.elf.hex
 **/*.a
+*.o
